@@ -27,8 +27,8 @@ function install_sea() {
 	#解压
 	tar -zxvf seafile-pro-server_6.2.9_x86-64.tar.gz	
 	mkdir installed
-	mv seafile-server*.tar.gz ./installed
-	mv seafile-server-6* seafile-server
+	mv seafile-pro-server*.tar.gz ./installed
+	mv seafile-pro-server-6* seafile-server
 	#安装依赖环境
 	yum -y install python-setuptools python-imaging python-ldap MySQL-python python-memcached python-urllib3
 	#进行安装
@@ -39,8 +39,8 @@ function install_sea() {
 	#防火墙放行端口
 	chk_firewall
 	#开机启动
-	echo "/home/MyCloud/seafile-server/seafile.sh start" >> /etc/rc.d/rc.local
-	echo "/home/MyCloud/seafile-server/seahub.sh start" >> /etc/rc.d/rc.local
+	echo "/home/MyCloud/seafile-pro-server/seafile.sh start" >> /etc/rc.d/rc.local
+	echo "/home/MyCloud/seafile-pro-server/seahub.sh start" >> /etc/rc.d/rc.local
 	chmod u+x /etc/rc.d/rc.local
 	#获取IP
 	osip=$(curl http://https.tn/ip/myip.php?type=onlyip)
@@ -74,8 +74,8 @@ if [ "$stype" == 1 ]
 		fi
 	elif [ "$stype" == 2 ]
 		then
-			/home/MyCloud/seafile-server/seafile.sh stop
-			/home/MyCloud/seafile-server/seahub.sh stop
+			/home/MyCloud/seafile-pro-server/seafile.sh stop
+			/home/MyCloud/seafile-pro-server/seahub.sh stop
 			rm -rf /home/MyCloud
 			rm -rf /tmp/seahub_cache/*
 			echo '卸载完成.'
