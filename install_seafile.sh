@@ -39,8 +39,8 @@ function install_sea() {
 	#防火墙放行端口
 	chk_firewall
 	#开机启动
-	echo "/home/MyCloud/seafile-pro-server/seafile.sh start" >> /etc/rc.d/rc.local
-	echo "/home/MyCloud/seafile-pro-server/seahub.sh start" >> /etc/rc.d/rc.local
+	echo "/home/MyCloud/seafile-server/seafile.sh start" >> /etc/rc.d/rc.local
+	echo "/home/MyCloud/seafile-server/seahub.sh start" >> /etc/rc.d/rc.local
 	chmod u+x /etc/rc.d/rc.local
 	#获取IP
 	osip=$(curl http://https.tn/ip/myip.php?type=onlyip)
@@ -74,8 +74,8 @@ if [ "$stype" == 1 ]
 		fi
 	elif [ "$stype" == 2 ]
 		then
-			/home/MyCloud/seafile-pro-server/seafile.sh stop
-			/home/MyCloud/seafile-pro-server/seahub.sh stop
+			/home/MyCloud/seafile-server/seafile.sh stop
+			/home/MyCloud/seafile-server/seahub.sh stop
 			rm -rf /home/MyCloud
 			rm -rf /tmp/seahub_cache/*
 			echo '卸载完成.'
