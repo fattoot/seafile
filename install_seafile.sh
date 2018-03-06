@@ -1,6 +1,7 @@
 #!/bin/bash
 ################ 一键安装Seafile脚本 ##################
 #Author:xiaoz.me
+#Update:2017-12-06
 #######################   END   #######################
 
 #防火墙放行端口
@@ -21,29 +22,36 @@ function chk_firewall() {
 #安装seafile函数
 function install_sea() {
 	cd /home/MyCloud
-	#下载安装包6.0.9 64bit
-	wget "https://download.seafile.com/d/6e5297246c/files/?p=/pro/seafile-pro-server_6.2.9_x86-64.tar.gz&dl=1" -O seafile-pro-server_6.2.9_x86-64.tar.gz
+	#下载安装包6.2.9 64bit
+	wget https://download.seafile.com/d/6e5297246c/files/?p=/pro/seafile-pro-server_6.2.9_x86-64.tar.gz	
 	#解压
-	tar -zxvf seafile-pro-server_6.1.4_x86-64.tar.gz
+	tar -zxvf seafile-pro-server_6.2.9_x86-64.tar.gz	
 	mkdir installed
-	mv seafile-pro-server_6.1.4_x86-64.tar.gz ./installed
-	mv seafile-pro-server_6.1.4_x86-64.tar.gz seafile-server
+	mv seafile-server*.tar.gz ./installed
+	mv seafile-server-6* seafile-server
 	#安装依赖环境
-	yum -y install python-setuptools python-imaging python-ldap MySQL-python python-memcached python-urllib3 jre
+	yum -y install python-setuptools python-imaging python-ldap MySQL-python python-memcached python-urllib3
 	#进行安装
-	cd seafile-pro-server-6.2.9 && ./setup-seafile.sh
+	cd seafile-server && ./setup-seafile.sh
 	
 	#启动服务
 	./seafile.sh start &&  ./seahub.sh start
 	#防火墙放行端口
 	chk_firewall
+	#开机启动
+	echo "/home/MyCloud/seafile-server/seafile.sh start" >> /etc/rc.d/rc.local
+	echo "/home/MyCloud/seafile-server/seahub.sh start" >> /etc/rc.d/rc.local
+	chmod u+x /etc/rc.d/rc.local
 	#获取IP
 	osip=$(curl http://https.tn/ip/myip.php?type=onlyip)
+	echo "------------------------------------------------------"
 	echo "恭喜，安装完成。请访问：http://${osip}:8000"
 	echo "帮助文档请访问：https://www.xiaoz.me/archives/8480"
+	echo "阿里云用户请注意放行端口(8000/8082)：https://www.xiaoz.me/archives/9310"
+	echo "------------------------------------------------------"
 }
 
-echo "##########	欢迎使用Seafile一键安装脚本^_^2018年3月6日19:45:29	##########"
+echo "##########	欢迎使用Seafile一键安装脚本^_^2018年3月6日20:42:39	##########"
 
 echo "1.安装Seafile"
 echo "2.卸载Seafile"
