@@ -31,7 +31,7 @@ function install_sea() {
 	#安装依赖环境
 	yum -y install python-setuptools python-imaging python-ldap MySQL-python python-memcached python-urllib3 jre
 	#进行安装
-	cd seafile-pro-server-6.1.4 && ./setup-seafile.sh
+	cd seafile-pro-server-6.2.9 && ./setup-seafile.sh
 	
 	#启动服务
 	./seafile.sh start &&  ./seahub.sh start
