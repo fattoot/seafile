@@ -43,7 +43,7 @@ function install_sea() {
 	echo "帮助文档请访问：https://www.xiaoz.me/archives/8480"
 }
 
-echo "##########	欢迎使用Seafile一键安装脚本^_^	##########"
+echo "##########	欢迎使用Seafile一键安装脚本^_^2018年3月6日19:45:29	##########"
 
 echo "1.安装Seafile"
 echo "2.卸载Seafile"
